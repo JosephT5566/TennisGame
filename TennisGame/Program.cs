@@ -11,15 +11,26 @@ namespace TennisGame
 
         static void Main(string[] args)
         {
+            string player = "";
             Scoreboard scoreboard = new Scoreboard();
             bool exit = false;
 
             while (!exit)
             {
-                Console.WriteLine("Enter point of Joey:");
-                scoreboard.Point1 = Console.ReadLine();
-                Console.WriteLine("Enter point of Tom:");
-                scoreboard.Point2 = Console.ReadLine();
+                Console.WriteLine("Who win this ball:");
+                player = Console.ReadLine();
+                switch (player)
+                {
+                    case "1":
+                        scoreboard.player1GetScore();
+                        break;
+                    case "2":
+                        scoreboard.player2GetScore();
+                        break;
+                    default:
+                        Console.WriteLine("Please key in 1 or 2");
+                        break;
+                }
 
                 Console.WriteLine(scoreboard.getTerm() + "\n");
             }
@@ -33,19 +44,19 @@ namespace TennisGame
 
         private Dictionary<string, string> termMap = new Dictionary<string, string>();
 
-        public string Point1
+        public void player1GetScore()
         {
-            set { this.point1 = value; }
+            this.point1 = (Int32.Parse(this.point1) + 1).ToString();
         }
-        public string Point2
+        public void player2GetScore()
         {
-            set { this.point2 = value; }
+            this.point2 = (Int32.Parse(this.point2) + 1).ToString();
         }
 
         public Scoreboard()
         {
-            this.point1 = "";
-            this.point2 = "";
+            this.point1 = "0";
+            this.point2 = "0";
             termMap.Add("00", "Love All");
             termMap.Add("10", "Fifteen Love");
             termMap.Add("20", "Thirty Love");
@@ -66,8 +77,10 @@ namespace TennisGame
             string term = "";
             string scores = string.Concat(this.point1, this.point2);
             if (termMap.TryGetValue(scores, out term))
-            { } else {
-                term = "Please key the correct scores in.";
+            { }
+            else
+            {
+                term = "The game finished.";
             }
 
             return term;
