@@ -36,6 +36,21 @@ namespace TennisGame.Tests
             Assert.AreEqual("Fifteen All", scoreboard.getTerm());
         }
         [TestMethod()]
+        public void getTermTest_joeyAdv()
+        {
+            Scoreboard scoreboard = new Scoreboard();
+            scoreboard.player1GetScore();
+            scoreboard.player1GetScore();
+            scoreboard.player1GetScore();
+            scoreboard.player2GetScore();
+            scoreboard.player2GetScore();
+            scoreboard.player2GetScore();
+            scoreboard.player1GetScore();
+
+            Assert.AreEqual("Joey Adv", scoreboard.getTerm());
+            Assert.AreNotEqual("The game finished", scoreboard.getTerm());
+        }
+        [TestMethod()]
         public void getTermTest_gameFinished()
         {
             Scoreboard scoreboard = new Scoreboard();
