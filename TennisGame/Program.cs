@@ -80,7 +80,7 @@ namespace TennisGame
             { }
             else
             {
-                term = "The game finished.";
+                term = "The game finished";
             }
 
             return term;
