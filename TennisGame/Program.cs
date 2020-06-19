@@ -41,16 +41,19 @@ namespace TennisGame
     {
         private string point1 = "";
         private string point2 = "";
+        private string term = "";
 
         private Dictionary<string, string> termMap = new Dictionary<string, string>();
 
         public void player1GetScore()
         {
             this.point1 = (Int32.Parse(this.point1) + 1).ToString();
+            setTerm();
         }
         public void player2GetScore()
         {
             this.point2 = (Int32.Parse(this.point2) + 1).ToString();
+            setTerm();
         }
 
         public Scoreboard()
@@ -72,18 +75,22 @@ namespace TennisGame
             termMap.Add("53", "Joey Win");
             termMap.Add("54", "Joey Adv");
         }
+        private void setTerm()
+        {
+            if (this.term != "The game finished")
+            {
+                string scores = string.Concat(this.point1, this.point2);
+                if (termMap.TryGetValue(scores, out this.term))
+                { }
+                else
+                {
+                    this.term = "The game finished";
+                }
+            }
+        }
         public string getTerm()
         {
-            string term = "";
-            string scores = string.Concat(this.point1, this.point2);
-            if (termMap.TryGetValue(scores, out term))
-            { }
-            else
-            {
-                term = "The game finished";
-            }
-
-            return term;
+            return this.term;
         }
     }
 }
